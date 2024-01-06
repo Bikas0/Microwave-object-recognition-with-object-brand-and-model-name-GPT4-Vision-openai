@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('static/img/oven1.jpeg');
+            background-size: cover;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            backdrop-filter: blur(5px);
+            color: #000;
+        }
+
+        .button-container {
+            margin: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-button,
+        .refresh-button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover,
+        .refresh-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .back-button {
+            background-color: #007BFF;
+        }
+
+        .refresh-button {
+            margin-left: 10px; /* Adjust margin as needed */
+            background-color: #28a745;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .refresh-button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .result-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: auto;
+        }
+
+        h2,
+        p {
+            text-align: center;
+            margin: 0;
+            color: #000;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+    </style>
+    <title>File Upload Result</title>
+</head>
+
+<body>
+    <!-- Button container to ensure equal size -->
+    <div class="button-container">
+        <!-- Back button to go to the home page -->
+        <a href="{{ url_for('index') }}" class="back-button"> Home </a>
+
+        <!-- Refresh button at the top right corner -->
+        <button onclick="location.reload()" class="refresh-button">Refresh</button>
+    </div>
+
+    <div class="result-container">
+        <h2>File uploaded successfully: {{ file_name }}</h2> <br>
+        <p>Brand Name: <b>{{ output[0] }}</b></p><br>
+        <p>Model Name: <b>{{ output[1] }}</b></p>
+
+        {% if output_image_path %}
+        <img src="{{ output_image_path }}" alt="Output Image">
+        {% endif %}
+
+    </div>
+</body>
+
+</html>

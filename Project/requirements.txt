@@ -1,0 +1,8 @@
+requests
+python-dotenv
+scikit-learn
+pandas
+opencv-python
+tensorflow
+pillow
+flask

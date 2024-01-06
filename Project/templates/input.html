@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('static/img/oven1.jpeg'); /* Change the filename accordingly */
+            background-size: cover;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            backdrop-filter: blur(5px); /* Adjust the blur value as needed */
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #444; /* Different color for the footer */
+            color: #fff;
+            padding: 5px; /* Smaller padding for the footer */
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 12px; /* Smaller font size for the footer */
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px; /* Adjust margin-bottom to accommodate the footer */
+        }
+
+        input[type="file"],
+        button[type="submit"] {
+            margin: 10px 0;
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        }
+
+        button[type="submit"]:hover,
+        input[type="file"]:hover {
+            transform: scale(1.1);
+            background-color: #4CAF50; /* Change the hover color as needed */
+            color: white;
+        }
+    </style>
+    <title>File Upload</title>
+</head>
+
+<body>
+    <header>
+        <h1>File Upload and Microwave Recognition</h1>
+    </header>
+    <div class="container">
+        <h2>Welcome to our <b>Microwave Recognition</b> page!</h2>
+
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".jpeg, .jpg, .png, .webp" id="fileInput" onchange="handleFile()">
+            <button type="submit">Upload</button>
+        </form>
+        <div id="fileInfo"></div>
+
+        <div id="microwaveSection">
+            <h2>About Microwaves</h2>
+            <p>Microwaves are versatile kitchen appliances that use electromagnetic radiation to heat and cook food quickly. They are a common and convenient tool in modern kitchens, known for their efficiency in reheating leftovers and cooking a variety of dishes.</p>
+            <img src="../static/img/ovean.webp" alt="Microwave Image" style="max-width: 10%; height: auto;">
+        </div>
+
+        <p>Explore the fascinating world of microwave recognition using <b>computer vision</b>. Imagine a system that can automatically identify and analyze microwaves in images or videos. This advanced technology leverages <b>deep learning</b> model to distinguish microwaves, opening up possibilities for smart kitchen applications and innovative automation.</p>
+    </div>
+    <footer>
+        &copy; <span id="currentYear"></span> All rights reserved.
+    </footer>
+    <script>
+        function handleFile() {
+            const fileInput = document.getElementById('fileInput');
+            const fileInfo = document.getElementById('fileInfo');
+
+            const file = fileInput.files[0];
+
+            if (file) {
+                fileInfo.innerHTML = `<p>File Name: ${file.name}</p>
+                                      <p>File Size: ${formatBytes(file.size)}</p>`;
+            } else {
+                fileInfo.innerHTML = 'No file selected.';
+            }
+        }
+
+        function formatBytes(bytes, decimals = 2) {
+            if (bytes === 0) return '0 Bytes';
+
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        }
+
+        // Dynamically update the current year in the footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
