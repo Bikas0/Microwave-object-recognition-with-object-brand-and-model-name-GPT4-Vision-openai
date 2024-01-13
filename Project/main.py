@@ -4,7 +4,8 @@ import requests
 import string
 import re
 from dotenv import load_dotenv
-from dlmodel import CalculateSimilarity
+from object_detection import object
+
 
 # OpenAI API Key
 load_dotenv()
@@ -75,7 +76,7 @@ def perform_image_processing(image_path):
     brand_name_start = message_content.find('"') + 1
     brand_name_end = message_content.find('"', brand_name_start)
     brand_name = message_content[brand_name_start:brand_name_end]
-    if len(word_lengths(brand_name)) >= 3:
+    if len(word_lengths(brand_name)) >= 4:
         brand_name = extract_first_sentence(brand_name)
 
     brands_name_start = message_content.find('"', brand_name_end + 1) + 1
@@ -101,7 +102,7 @@ def perform_image_processing(image_path):
 
 
 def process_image(img_path):
-    image_path, _ = CalculateSimilarity(img_path)
+    image_path = object(img_path)
 
     if image_path is not None:
         image_path = os.path.join("image", image_path)
@@ -109,4 +110,4 @@ def process_image(img_path):
         image_path = img_path
 
     band_name, model_name = perform_image_processing(image_path)
-    return band_name, model_name
+    return band_name, model_name, image_path

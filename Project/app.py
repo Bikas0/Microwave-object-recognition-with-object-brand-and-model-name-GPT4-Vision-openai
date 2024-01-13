@@ -24,10 +24,11 @@ def upload_file():
         uploaded_file.save(file_path)
 
         # Process the image and get the output
-        brand_output, model_output = process_image(file_path)
+        brand_output, model_output, output_image_path = process_image(file_path)
 
         # Render the output
-        return render_template('result.html', file_name=uploaded_file.filename, output=[brand_output, model_output])
+        return render_template('result.html', file_name=uploaded_file.filename,
+                               output=[brand_output, model_output])
     else:
         return redirect(url_for('index'))
 
